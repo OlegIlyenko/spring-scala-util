@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:scala="http://scala.spring.oleg.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+        http://scala.spring.oleg.org/schema/util http://scala.spring.oleg.org/schema/util/spring-scala-util-1.0.xsd">
+
+    <util:list id="javaList">
+        <value>I</value>
+        <value>am</value>
+        <value>Java</value>
+        <value>List</value>
+    </util:list>
+
+    <scala:list id="scalaList" ref="javaList" scope="prototype" />
+
+    <bean id="sample" class="org.oleg.spring.scala.bean.SampleBean">
+
+        <property name="javaStringList">
+            <util:list>
+                <value>Hello</value>
+                <value>World</value>
+                <value>!!!</value>
+            </util:list>
+        </property>
+
+        <property name="scalaStringList">
+            <scala:list>
+                <value>Hello</value>
+                <value>Scala</value>
+                <value>World</value>
+                <value>!!!</value>
+            </scala:list>
+        </property>
+
+        <property name="scalaStringSeq" ref="scalaList" />
+        <property name="scalaStringSeq1" ref="scalaList" />
+
+        <property name="scalaStringBuffer">
+            <scala:buffer>
+                <value>I</value>
+                <value>am</value>
+                <value>Buffer</value>
+            </scala:buffer>
+        </property>
+
+        <property name="scalaMutableSet">
+            <scala:set mutability="mutable">
+                <value>I</value>
+                <value>am</value>
+                <value>mutable</value>
+                <value>Set</value>
+            </scala:set>
+        </property>
+
+        <property name="scalaImmutableSet">
+            <scala:set>
+                <value>I</value>
+                <value>am</value>
+                <value>immutable</value>
+                <value>Set</value>
+            </scala:set>
+        </property>
+
+        <property name="scalaMutableMap">
+            <scala:map mutability="mutable">
+                <entry key="Hello" value="world" />
+                <entry key="Spring" value="Scala" />
+            </scala:map>
+        </property>
+
+        <property name="scalaImmutableMap">
+            <scala:map>
+                <entry key="Hello" value="world" />
+                <entry key="Spring" value="Scala" />
+            </scala:map>
+        </property>
+
+    </bean>
+
+</beans>
