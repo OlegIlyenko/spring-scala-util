@@ -10,11 +10,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <!-- TODO: change to ranges before release -->
     <properties>
-        <!--<spring.version>[2.0,)</spring.version>-->
         <spring.version>3.0.0.RC1</spring.version>
-        <!--<scala.version>[2.8.0,)</scala.version>-->
         <scala.version>2.8.0.Beta1-RC1</scala.version>
     </properties>
 
