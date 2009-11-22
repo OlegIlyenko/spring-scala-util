@@ -77,6 +77,7 @@
     <li><a href="#over">Overview</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#types">Scala collection type mappings</a></li>
+    <li><a href="#maven">Using ${project.artifactId} in Maven 2 project</a></li>
     <li><a href="#contrib">Contribution</a></li>
 </ol>
 
@@ -272,7 +273,35 @@
     </table>
 </p>
 
-<h2 id="contrib">4. Contribution</h2>
+<h2 id="maven">4. Using ${project.artifactId} in Maven 2 project</h2>
+
+<p>
+    In order to use <b>${project.artifactId}</b> withing Maven2 project you should add one new repository in your <b>pom.xml</b>:
+
+    <pre>
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;angelsmasterpiece-repo&lt;/id&gt;
+            &lt;name&gt;Angel's Masterpiece Maven 2 Repository&lt;/name&gt;
+            &lt;url&gt;http://github.com/OlegIlyenko/angelsmasterpiece-maven-repo/raw/master&lt;/url&gt;
+        &lt;/repository&gt;
+
+        .......
+    &lt;/repositories&gt;</pre>
+</p>
+
+<p>
+    Now you can add this dependency:
+
+    <pre>
+    &lt;dependency&gt;
+        &lt;groupId&gt;${project.groupId}&lt;/groupId&gt;
+        &lt;artifactId&gt;${project.artifactId}&lt;/artifactId&gt;
+        &lt;version&gt;${project.version}&lt;/version&gt;
+    &lt;/dependency&gt;</pre>
+</p>
+
+<h2 id="contrib">5. Contribution</h2>
 
 <p>
     Project is hosted at <b>Github</b>: <a href="http://github.com/OlegIlyenko/spring-scala-util">http://github.com/OlegIlyenko/spring-scala-util</a>.
