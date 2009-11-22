@@ -1,1 +1,1 @@
-http\://scala.spring.oleg.org/schema/util=org.oleg.spring.beans.factory.xml.UtilNamespaceHandler
+http\://www.angelsmasterpiece.org/schema/spring/scala/util=org.angelsmasterpiece.spring.beans.factory.xml.UtilNamespaceHandler

@@ -3,11 +3,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:scala="http://scala.spring.oleg.org/schema/util"
+       xmlns:scala="http://www.angelsmasterpiece.org/schema/spring/scala/util"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
-        http://scala.spring.oleg.org/schema/util http://scala.spring.oleg.org/schema/util/spring-scala-util-1.0.xsd">
+        http://www.angelsmasterpiece.org/schema/spring/scala/util http://www.angelsmasterpiece.org/schema/spring/scala/util/spring-scala-util-1.0.xsd">
 
     <util:list id="javaList">
         <value>I</value>
@@ -18,7 +18,7 @@
 
     <scala:list id="scalaList" ref="javaList" scope="prototype" />
 
-    <bean id="sample" class="org.oleg.spring.scala.bean.SampleBean">
+    <bean id="sample" class="org.angelsmasterpiece.spring.scala.bean.SampleBean">
 
         <property name="javaStringList">
             <util:list>
