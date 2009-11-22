@@ -1,0 +1,288 @@
+<html>
+<head>
+    <title>Spring-Scala Utilities ${project.version} - Reference documentation</title>
+
+
+    <style type="text/css">
+        body {
+            font-family: Verdana, Tahoma, Arial;
+        }
+
+        .h {
+            vertical-align:top;
+            font-weight:bold;
+            text-align:right;
+            padding-right: 10px;
+            padding-top: 10px;
+        }
+
+        .v {
+            padding-top: 10px;
+        }
+
+        pre {
+            border: 1px solid #666666;;
+            color:#666666;
+            padding: 5px;
+        }
+
+        .desc {
+            color:#666666;
+            font-style:italic;
+        }
+
+        a {
+            text-decoration:none;
+            color:#cb0000;
+            cursor:pointer;
+        }
+
+        a:hover {
+            text-decoration:underline;
+        }
+
+        th {
+            background-color:#e8e8ba;
+        }
+
+        th, td {
+            border: 1px solid #9d9c9c;
+        }
+
+        table {
+            border: 1px solid #9d9c9c;
+        }
+
+        .headTable {
+            border:none
+        }
+
+        .headTable td {
+            border:none;
+        }
+
+        .note {
+            background-color:#ffff99;
+            padding:10px;
+        }
+    </style>
+
+</head>
+<body>
+<h1>Spring-Scala Utilities ${project.version}</h1>
+
+<h2>Table of Contents</h2>
+
+<ol>
+    <li><a href="#over">Overview</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#types">Scala collection type mappings</a></li>
+    <li><a href="#contrib">Contribution</a></li>
+</ol>
+
+<h2 id="over">1. Overview</h2>
+
+<table class="headTable">
+    <tr>
+        <td class="h">Project:</td>
+        <td class="v">spring-scala-util</td>
+    </tr>
+    <tr>
+        <td class="h">Version:</td>
+        <td class="v">${project.version}</td>
+    </tr>
+    <tr>
+        <td class="h">Author:</td>
+        <td class="v">Oleg Ilyenko</td>
+    </tr>
+    <tr>
+        <td class="h">Description:</td>
+        <td class="v">
+            <p>
+                Project provides spring utility namespace. This namespace provides different tags for dealing with scala
+                specific tasks. At the moment namespace provides tags for creation of different scala collections.
+            </p>
+        </td>
+    </tr>
+</table>
+
+<h2 id="usage">2. Usage</h2>
+
+<p>
+    Let's first create sample scala bean, which we want to instantiate from spring:
+
+    <pre>
+    package org.angelsmasterpiece.spring.scala.bean
+
+    import collection._
+    import reflect.BeanInfo
+
+    @BeanInfo
+    class SampleBean(
+        var scalaStringList: immutable.List[String] = null,
+        var scalaStringBuffer: mutable.Buffer[String] = null,
+
+        var scalaMutableSet: mutable.Set[String] = null,
+        var scalaImmutableSet: immutable.Set[String] = null,
+
+        var scalaMutableMap: mutable.Map[String, String] = null,
+        var scalaImmutableMap: immutable.Map[String, String] = null
+    ) {
+        def this() = this (null)
+    }</pre>
+</p>
+
+<p>
+    Now we should create spring XML context and add <b>http://www.angelsmasterpiece.org/schema/spring/scala/util</b> namespace:
+    <pre>
+    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+    &lt;beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           <b style="color:black;">xmlns:scala="http://www.angelsmasterpiece.org/schema/spring/scala/util"</b>
+           xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            <b style="color:black;">http://www.angelsmasterpiece.org/schema/spring/scala/util http://www.angelsmasterpiece.org/schema/spring/scala/util/spring-scala-util-1.0.xsd</b>"&gt;
+
+        .......
+
+    &lt;/beans&gt;
+    </pre>
+</p>
+
+<p>
+    At this point you are ready to use <b>scala</b> namespace and instantiate <b>SampleBean</b> like this:
+    <pre>
+    &lt;bean id="sample" class="org.angelsmasterpiece.spring.scala.bean.SampleBean"&gt;
+
+        &lt;property name="scalaStringList"&gt;
+            &lt;scala:list&gt;
+                &lt;value&gt;Hello&lt;/value&gt;
+                &lt;value&gt;Scala&lt;/value&gt;
+                &lt;value&gt;World&lt;/value&gt;
+                &lt;value&gt;!!!&lt;/value&gt;
+            &lt;/scala:list&gt;
+        &lt;/property&gt;
+
+        &lt;property name="scalaStringBuffer"&gt;
+            &lt;scala:buffer&gt;
+                &lt;value&gt;I&lt;/value&gt;
+                &lt;value&gt;am&lt;/value&gt;
+                &lt;value&gt;Buffer&lt;/value&gt;
+            &lt;/scala:buffer&gt;
+        &lt;/property&gt;
+
+        &lt;property name="scalaMutableSet"&gt;
+            &lt;scala:set mutability="mutable"&gt;
+                &lt;value&gt;I&lt;/value&gt;
+                &lt;value&gt;am&lt;/value&gt;
+                &lt;value&gt;mutable&lt;/value&gt;
+                &lt;value&gt;Set&lt;/value&gt;
+            &lt;/scala:set&gt;
+        &lt;/property&gt;
+
+        &lt;property name="scalaImmutableSet"&gt;
+            &lt;scala:set&gt;
+                &lt;value&gt;I&lt;/value&gt;
+                &lt;value&gt;am&lt;/value&gt;
+                &lt;value&gt;immutable&lt;/value&gt;
+                &lt;value&gt;Set&lt;/value&gt;
+            &lt;/scala:set&gt;
+        &lt;/property&gt;
+
+        &lt;property name="scalaMutableMap"&gt;
+            &lt;scala:map mutability="mutable"&gt;
+                &lt;entry key="Hello" value="world" /&gt;
+                &lt;entry key="Spring" value="Scala" /&gt;
+            &lt;/scala:map&gt;
+        &lt;/property&gt;
+
+        &lt;property name="scalaImmutableMap"&gt;
+            &lt;scala:map&gt;
+                &lt;entry key="Hello" value="world" /&gt;
+                &lt;entry key="Spring" value="Scala" /&gt;
+            &lt;/scala:map&gt;
+        &lt;/property&gt;
+
+    &lt;/bean&gt;
+    </pre>
+</p>
+
+<p>
+    If you have existing java list somewhere in your application context, then you can always use <b>ref</b> attribute with
+    all tags in <b>scala</b> namespace:
+    <pre>
+    &lt;util:list id="javaList"&gt;
+        &lt;value&gt;I&lt;/value&gt;
+        &lt;value&gt;am&lt;/value&gt;
+        &lt;value&gt;Java&lt;/value&gt;
+        &lt;value&gt;List&lt;/value&gt;
+    &lt;/util:list&gt;
+    
+    &lt;bean id="sample" class="org.angelsmasterpiece.spring.scala.bean.SampleBean"&gt;
+        &lt;property name="scalaStringList"&gt;
+            &lt;scala:list <b style="color:black;">ref="javaList"</b> /&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+    </pre>
+</p>
+
+<h2 id="types">3. Scala collection type mappings</h2>
+
+<p>
+    By default all tags (except <b>list</b> and <b>buffer</b>) create immutable scala collections. If you want to create
+    mutable collection, you should set <b>mutability</b> attribute to <b>mutable</b>. Following table shows scala collection classes
+    with correspondent tags:    <br /><br />
+
+    <table border="0" cellpadding="5" cellspacing="5">
+        <thead>
+        <tr>
+            <th>Scala class</th>
+            <th>Correspondent tag</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>scala.collection.<b>immutable.List</b></td>
+            <td>&lt;scala:list /&gt;</td>
+        </tr>
+        <tr>
+            <td>scala.collection.<b>mutable.Buffer</b></td>
+            <td>&lt;scala:buffer /&gt;</td>
+        </tr>
+
+        <tr>
+            <td>scala.collection.<b>immutable.Set</b></td>
+            <td>&lt;scala:set /&gt; or<br />&lt;scala:set mutability="immutable" /&gt;</td>
+        </tr>
+        <tr>
+            <td>scala.collection.<b>mutable.Set</b></td>
+            <td>&lt;scala:set mutability="mutable" /&gt;</td>
+        </tr>
+
+        <tr>
+            <td>scala.collection.<b>immutable.Map</b></td>
+            <td>&lt;scala:map /&gt; or<br />&lt;scala:map mutability="immutable" /&gt;</td>
+        </tr>
+        <tr>
+            <td>scala.collection.<b>mutable.Map</b></td>
+            <td>&lt;scala:map mutability="mutable" /&gt;</td>
+        </tr>
+        </tbody>
+    </table>
+</p>
+
+<h2 id="contrib">4. Contribution</h2>
+
+<p>
+    Project is hosted at <b>Github</b>: <a href="http://github.com/OlegIlyenko/spring-scala-util">http://github.com/OlegIlyenko/spring-scala-util</a>.
+    Please, feel free to fork project and contribute to it.
+</p>
+
+<p>
+    If you found bug or you have some interesting ideas about new features, you can add them here:<br />
+    <a href="http://github.com/OlegIlyenko/spring-scala-util/issues">http://github.com/OlegIlyenko/spring-scala-util/issues</a>
+</p>
+
+</body>
+</html>
