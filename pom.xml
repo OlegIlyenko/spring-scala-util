@@ -11,6 +11,30 @@
     <packaging>jar</packaging>
 
     <name>Spring-Scala Utilities</name>
+    <url>http://github.com/OlegIlyenko/spring-scala-util</url>
+
+    <scm>
+        <connection>scm:git:git://github.com/OlegIlyenko/spring-scala-util.git</connection>
+        <developerConnection>scm:git:git@github.com:OlegIlyenko/spring-scala-util.git</developerConnection>
+        <url>http://github.com/OlegIlyenko/spring-scala-util/tree/master</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>OlegIlyenko</id>
+            <name>Oleg Ilyenko</name>
+            <email>oleg.ilyenko@gmail.com</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>http://github.com/OlegIlyenko/spring-scala-util/issues</url>
+    </issueManagement>
 
     <properties>
         <spring.version>3.0.0.RC1</spring.version>
@@ -112,6 +136,19 @@
         </dependency>
 
     </dependencies>
+
+    <distributionManagement>               
+        <repository>
+            <id>flex-compile-maven-repo</id>
+            <url>${angelsmasterpiece.repo}</url>
+            <uniqueVersion>true</uniqueVersion>
+        </repository>
+
+        <site>
+            <id>flex-compile-maven-site-repo</id>
+            <url>${angelsmasterpiece.site-repo}</url>
+        </site>                                     
+    </distributionManagement>
 
     <repositories>
         <repository>
