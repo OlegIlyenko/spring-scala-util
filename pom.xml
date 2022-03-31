@@ -37,7 +37,7 @@
     </issueManagement>
 
     <properties>
-        <spring.version>3.0.0.RC1</spring.version>
+        <spring.version>5.3.18</spring.version>
         <scala.version>2.8.0.Beta1-RC1</scala.version>
     </properties>
 
